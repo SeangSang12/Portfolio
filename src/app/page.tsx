@@ -50,7 +50,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center sm:items-start sm:text-left space-y-4">
         <h2 className="text-2xl font-bold">Projects</h2>
         <div className="flex flex-wrap flex-col items-start justify-start gap-4 mt-4">
-          <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:text-left">
+          <div className="flex flex-col items-center justify-center sm:flex-col sm:items-start sm:text-left">
             <h3 className="text-lg font-bold">Portfolio Website</h3>
             <p className="text-gray-400 text-center sm:text-left">
             A modern portfolio website with light/dark mode, smooth animations, responsive layout, and SEO optimization.
@@ -59,7 +59,7 @@ export default function Home() {
             Tech Stack: Tailwind CSS, Next.js
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:text-left">
+          <div className="flex flex-col items-center justify-center sm:flex-col sm:items-start sm:text-left">
             <h3 className="text-lg font-bold">Facebook Clone</h3>
             <p className="text-gray-400 text-center sm:text-left">
             A UI clone of Facebook focusing on layout accuracy, responsive design, and component structure.
@@ -68,7 +68,7 @@ export default function Home() {
               Tech Stack: Tailwind CSS, Next.js
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:text-left">
+          <div className="flex flex-col items-center justify-center sm:flex-col sm:items-start sm:text-left">
             <h3 className="text-lg font-bold">Instagram Clone</h3>
             <p className="text-gray-400 text-center sm:text-left">
             A UI clone of Instagram focusing on layout accuracy, responsive design, and component structure.
