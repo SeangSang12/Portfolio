@@ -113,7 +113,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center sm:items-start sm:text-left space-y-4">
         <h2 className="text-2xl font-bold">Work Experience & Education</h2>
         <div className="flex flex-wrap flex-col items-center justify-center sm:items-start sm:text-left gap-4 mt-4">
-          <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:text-left">
+          <div className="flex flex-col items-center justify-center sm:flex-col sm:items-start sm:text-left">
             <h3 className="text-lg font-bold">Web Developer</h3>
             <p className="text-gray-400 text-center sm:text-left">
               A web developer with a passion for building modern, responsive, and user-friendly web applications.
@@ -122,7 +122,7 @@ export default function Home() {
               Tech Stack: HTML, CSS, JavaScript,Tailwind CSS, Next.js, TypeScript, Nest.js, Prisma, PostgreSQL,GitHub, Docker
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:text-left">
+          <div className="flex flex-col items-center justify-center sm:flex-col sm:items-start sm:text-left">
             <h3 className="text-lg font-bold">Education</h3>
             <p className="text-gray-400 text-center sm:text-left">
               Bachelor of Science in Computer Science, from Build Bright University campus (2020-2023)
