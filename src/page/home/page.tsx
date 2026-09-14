@@ -19,17 +19,22 @@ export default function HomePage() {
 
         {/* Left Column - Sidebar */}
         <div className="w-full lg:w-1/3 flex flex-col">
-          {/* Profile Picture */}
-          <div className="mb-6 relative w-max">
-            <div className="relative overflow-hidden rounded-full border-4 border-gray-100 dark:border-gray-800 shadow-sm">
-              <img
-                src="/assets/profile.png"
-                alt="Seang Sang"
-                className="object-cover w-28 h-28"
-              />
+          {/* Cover Image & Profile Container */}
+          <div className="mb-6">
+            <div className="w-full h-48 sm:h-56 rounded-2xl overflow-hidden relative mb-4">
+              <img src="/assets/bgprofile.jpeg" alt="Cover Background" className="w-full h-full object-cover" />
             </div>
-            <div className="absolute bottom-1.5 right-1.5 bg-white dark:bg-[#212529] rounded-full flex items-center justify-center">
-              <BadgeCheck className="w-7 h-7 text-white dark:text-gray-950 fill-blue-500" />
+            <div className="relative w-max -mt-20 ml-6">
+              <div className="relative overflow-hidden rounded-full border-4 border-white dark:border-gray-950 shadow-sm bg-white dark:bg-gray-950">
+                <img
+                  src="/assets/profile.png"
+                  alt="Seang Sang"
+                  className="object-cover w-28 h-28"
+                />
+              </div>
+              <div className="absolute bottom-1.5 right-1.5 bg-white dark:bg-gray-950 rounded-full flex items-center justify-center">
+                <BadgeCheck className="w-7 h-7 text-white dark:text-gray-950 fill-blue-500" />
+              </div>
             </div>
           </div>
 

@@ -33,9 +33,10 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-:root[lang="KH"] {
+:root[lang="KH"] body {
   --font-sans: var(--font-hanuman);
   --font-mono: var(--font-hanuman);
+  --font-race: var(--font-hanuman);
 }
 
 @keyframes scroll-left {
