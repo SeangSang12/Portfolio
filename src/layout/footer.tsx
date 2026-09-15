@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { socialMediaLinks } from "@/data/socialmedia";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,16 +14,22 @@ export default function Footer() {
         </div>
 
         {/* Right: Social Links */}
-        <div className="flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
-          <Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-            LinkedIn
-          </Link>
-          <Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-            Dribbble
-          </Link>
-          <Link href="#" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-            Twitter
-          </Link>
+        <div className="flex items-center gap-4 sm:gap-5">
+          {socialMediaLinks.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:scale-110 transition-transform text-gray-500 dark:text-gray-400"
+              title={social.name}
+            >
+              <social.icon 
+                className="w-5 h-5" 
+                color={social.color} 
+              />
+            </a>
+          ))}
         </div>
         
       </div>

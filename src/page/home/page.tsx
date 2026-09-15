@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/Card";
 import { BadgeCheck } from "lucide-react";
+import { socialMediaLinks } from "@/data/socialmedia";
 import { 
   SiTailwindcss, SiJavascript, SiTypescript, SiReact, SiNextdotjs, 
   SiNodedotjs, SiExpress, SiNestjs, SiPrisma, SiPostgresql, 
@@ -24,28 +25,50 @@ export default function HomePage() {
             <div className="w-full h-48 sm:h-56 rounded-2xl overflow-hidden relative mb-4">
               <img src="/assets/bgprofile.jpeg" alt="Cover Background" className="w-full h-full object-cover" />
             </div>
-            <div className="relative w-max -mt-20 ml-6">
-              <div className="relative overflow-hidden rounded-full border-4 border-white dark:border-gray-950 shadow-sm bg-white dark:bg-gray-950">
-                <img
-                  src="/assets/profile.png"
-                  alt="Seang Sang"
-                  className="object-cover w-28 h-28"
-                />
+            
+            <div className="flex items-end justify-between px-6 -mt-20 relative">
+              <div className="relative w-max">
+                <div className="relative overflow-hidden rounded-full border-4 border-white dark:border-gray-950 shadow-sm bg-white dark:bg-gray-950">
+                  <img
+                    src="/assets/profile.png"
+                    alt="Seang Sang"
+                    className="object-cover w-28 h-28"
+                  />
+                </div>
+                <div className="absolute bottom-1.5 right-1.5 bg-white dark:bg-gray-950 rounded-full flex items-center justify-center">
+                  <BadgeCheck className="w-7 h-7 text-white dark:text-gray-950 fill-blue-500" />
+                </div>
               </div>
-              <div className="absolute bottom-1.5 right-1.5 bg-white dark:bg-gray-950 rounded-full flex items-center justify-center">
-                <BadgeCheck className="w-7 h-7 text-white dark:text-gray-950 fill-blue-500" />
+
+              {/* Social Media Links */}
+              <div className="flex items-center gap-4 sm:gap-5 mb-2">
+                {socialMediaLinks.map((social) => (
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:scale-110 transition-transform text-gray-700 dark:text-gray-300"
+                    title={social.name}
+                  >
+                    <social.icon 
+                      className="w-5 h-5 sm:w-6 sm:h-6" 
+                      color={social.color} 
+                    />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
 
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight font-race">
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight font-race px-6">
             Seang Sang
           </h1>
-          <p className="text-blue-600 dark:text-blue-400 font-medium mt-1">
+          <p className="text-blue-600 dark:text-blue-400 font-medium mt-1 px-6">
             {t('home.role')}
           </p>
 
-          <p className="text-gray-500 dark:text-gray-400 mt-4 leading-relaxed text-sm">
+          <p className="text-gray-500 dark:text-gray-400 mt-4 leading-relaxed text-sm px-6">
             {t('home.intro_1')}
           </p>
 
