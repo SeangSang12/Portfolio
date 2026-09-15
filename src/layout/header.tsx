@@ -71,7 +71,7 @@ export default function AppHeader() {
             <Link href="#skills" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               {t('nav.skills', 'Skills')}
             </Link>
-            <Link href="#projects" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+            <Link href="/project" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               {t('nav.projects', 'Projects')}
             </Link>
           </nav>
@@ -183,7 +183,7 @@ export default function AppHeader() {
               
               <motion.div variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}>
                 <Link 
-                  href="#projects" 
+                  href="/project" 
                   className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
