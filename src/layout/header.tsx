@@ -127,13 +127,13 @@ export default function AppHeader() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden fixed inset-0 z-50 bg-white dark:bg-gray-950 flex flex-col"
+            initial={{ clipPath: "circle(0% at calc(100% - 3rem) 2rem)", opacity: 0 }}
+            animate={{ clipPath: "circle(150% at calc(100% - 3rem) 2rem)", opacity: 1 }}
+            exit={{ clipPath: "circle(0% at calc(100% - 3rem) 2rem)", opacity: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden fixed inset-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl flex flex-col"
           >
-            <div className="flex justify-between items-center p-4 h-16 border-b border-gray-100 dark:border-gray-800/50">
+            <div className="flex justify-between items-center p-4 h-16 border-b border-gray-200/50 dark:border-gray-800/50">
               <Link 
                 href="#profile"
                 className="flex items-center gap-3 transition-transform hover:scale-105 active:scale-95"
@@ -144,7 +144,7 @@ export default function AppHeader() {
               </Link>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)} 
-                className="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+                className="p-2 text-gray-500 hover:bg-gray-200/50 dark:hover:bg-gray-800/50 rounded-full transition-colors"
                 aria-label="Close Menu"
               >
                 <X className="w-6 h-6" />
@@ -156,35 +156,35 @@ export default function AppHeader() {
               animate="open"
               exit="closed"
               variants={{
-                open: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+                open: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
                 closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
               }}
-              className="flex flex-col flex-1 items-center justify-start px-6 pb-6 pt-10 space-y-8"
+              className="flex flex-col flex-1 items-center justify-center px-6 pb-20 space-y-10"
             >
-              <motion.div variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}>
+              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
                 <Link 
                   href="/about" 
-                  className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('nav.about', 'About Me')}
                 </Link>
               </motion.div>
               
-              <motion.div variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}>
+              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
                 <Link 
                   href="#skills" 
-                  className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('nav.skills', 'Skills')}
                 </Link>
               </motion.div>
               
-              <motion.div variants={{ open: { opacity: 1, y: 0 }, closed: { opacity: 0, y: 20 } }}>
+              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
                 <Link 
                   href="/project" 
-                  className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {t('nav.projects', 'Projects')}
