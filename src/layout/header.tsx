@@ -127,11 +127,11 @@ export default function AppHeader() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
-            initial={{ clipPath: "circle(0% at calc(100% - 3rem) 2rem)", opacity: 0 }}
-            animate={{ clipPath: "circle(150% at calc(100% - 3rem) 2rem)", opacity: 1 }}
-            exit={{ clipPath: "circle(0% at calc(100% - 3rem) 2rem)", opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden fixed inset-0 z-50 bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl flex flex-col"
+            initial={{ opacity: 0, clipPath: "circle(0px at calc(100% - 40px) 40px)" }}
+            animate={{ opacity: 1, clipPath: "circle(150% at calc(100% - 40px) 40px)" }}
+            exit={{ opacity: 0, clipPath: "circle(0px at calc(100% - 40px) 40px)" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden fixed inset-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl flex flex-col"
           >
             <div className="flex justify-between items-center p-4 h-16 border-b border-gray-200/50 dark:border-gray-800/50">
               <Link 
@@ -151,17 +151,13 @@ export default function AppHeader() {
               </button>
             </div>
             
-            <motion.nav 
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={{
-                open: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-                closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
-              }}
-              className="flex flex-col flex-1 items-center justify-center px-6 pb-20 space-y-10"
-            >
-              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
+            <nav className="flex flex-col flex-1 items-center justify-start pt-16 px-6 pb-20 space-y-10">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
                 <Link 
                   href="/about" 
                   className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -171,7 +167,12 @@ export default function AppHeader() {
                 </Link>
               </motion.div>
               
-              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, delay: 0.15 }}
+              >
                 <Link 
                   href="#skills" 
                   className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -181,7 +182,12 @@ export default function AppHeader() {
                 </Link>
               </motion.div>
               
-              <motion.div variants={{ open: { opacity: 1, y: 0, scale: 1 }, closed: { opacity: 0, y: 40, scale: 0.95 } }} transition={{ duration: 0.4, ease: "easeOut" }}>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
                 <Link 
                   href="/project" 
                   className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -190,7 +196,7 @@ export default function AppHeader() {
                   {t('nav.projects', 'Projects')}
                 </Link>
               </motion.div>
-            </motion.nav>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>
