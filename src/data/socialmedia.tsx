@@ -16,7 +16,7 @@ export const socialMediaLinks = [
   },
   {
     name: "Telegram",
-    url: "https://t.me/seangsang",
+    url: "https://t.me/sangseang",
     icon: SiTelegram,
     color: "#26A5E4",
   }
