@@ -22,6 +22,7 @@ export async function generateMetadata({
 }
 
 // Since NewsPageComponent expects searchParams in Next.js 15+ 
-export default async function News(props: { searchParams?: Promise<{ tab?: string; page?: string; country?: string; language?: string }> }) {
-  return <NewsPageComponent searchParams={props.searchParams} />;
+export default async function News(props: { params: Promise<{ locale: string }>, searchParams?: Promise<{ tab?: string; page?: string; country?: string; language?: string }> }) {
+  const { locale } = await props.params;
+  return <NewsPageComponent locale={locale} searchParams={props.searchParams} />;
 }

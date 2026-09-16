@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import NewsInfiniteGrid from "@/components/NewsInfiniteGrid";
 import NewsFilter from "@/components/NewsFilter";
 
-export default async function NewsPage({ searchParams }: { searchParams?: Promise<{ tab?: string; page?: string; country?: string; language?: string }> }) {
+export default async function NewsPage({ locale, searchParams }: { locale: string; searchParams?: Promise<{ tab?: string; page?: string; country?: string; language?: string }> }) {
   const resolvedParams = searchParams ? await searchParams : {};
   const tab = resolvedParams.tab || 'latest';
   const pageToken = resolvedParams.page;
@@ -35,10 +35,12 @@ export default async function NewsPage({ searchParams }: { searchParams?: Promis
             params.set('tab', item.id);
             if (language) params.set('language', language);
             
+            const basePath = locale === 'en' ? '/news' : `/${locale}/news`;
+            
             return (
               <Link 
                 key={item.id} 
-                href={`/news?${params.toString()}`}
+                href={`${basePath}?${params.toString()}`}
                 className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
                   tab === item.id 
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30' 

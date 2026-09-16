@@ -34,7 +34,10 @@ export default function NewsCard({ item, index }: NewsCardProps) {
             }
           />
           {pubDate && (
-            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold shadow-sm pointer-events-none text-gray-900 dark:text-gray-200">
+            <div 
+              suppressHydrationWarning 
+              className="absolute top-2 right-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold shadow-sm pointer-events-none text-gray-900 dark:text-gray-200"
+            >
               {new Date(pubDate).toLocaleDateString()}
             </div>
           )}

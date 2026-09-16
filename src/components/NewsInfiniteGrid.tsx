@@ -27,15 +27,15 @@ export default function NewsInfiniteGrid({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  // Sync state if props change (e.g. when tab or language changes, the server component will re-render with new initialItems)
+  // Sync state only when the fundamental query parameters change (like switching tabs)
   useEffect(() => {
     setItems(initialItems);
     setNextPage(initialNextPage);
     setError(null);
-  }, [initialItems, initialNextPage, tab, country, language]);
+  }, [tab, country, language]); // Intentionally omitting initialItems and initialNextPage to prevent RSC refresh from wiping state
 
   const loadMore = useCallback(async () => {
-    if (loading || !nextPage) return;
+    if (loadingRef.current || !nextPageRef.current) return;
 
     setLoading(true);
     setError(null);
@@ -44,17 +44,17 @@ export default function NewsInfiniteGrid({
       let newsData;
       switch (tab) {
         case 'latest':
-          newsData = await fetchLatestNews(nextPage, country, language);
+          newsData = await fetchLatestNews(nextPageRef.current, country, language);
           break;
         case 'market':
-          newsData = await fetchMarketNews(nextPage, country, language);
+          newsData = await fetchMarketNews(nextPageRef.current, country, language);
           break;
         case 'sources':
-          newsData = await fetchNewsSources(nextPage, country, language);
+          newsData = await fetchNewsSources(nextPageRef.current, country, language);
           break;
         case 'crypto':
         default:
-          newsData = await fetchCryptoNews(nextPage, country, language);
+          newsData = await fetchCryptoNews(nextPageRef.current, country, language);
           break;
       }
 
@@ -67,18 +67,27 @@ export default function NewsInfiniteGrid({
     } finally {
       setLoading(false);
     }
-  }, [nextPage, tab, country, language, loading]);
+  }, [tab, country, language]); // Intentionally removed nextPage and loading so loadMore is stable
+
+  // Keep a stable ref to avoid recreating the observer
+  const loadingRef = useRef(loading);
+  const nextPageRef = useRef(nextPage);
+
+  useEffect(() => {
+    loadingRef.current = loading;
+    nextPageRef.current = nextPage;
+  }, [loading, nextPage]);
 
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && nextPage && !loading) {
+        if (entries[0].isIntersecting && nextPageRef.current && !loadingRef.current) {
           loadMore();
         }
       },
-      { threshold: 0.1, rootMargin: '100px' } // Load a bit before it enters the viewport
+      { threshold: 0.1, rootMargin: '200px' } 
     );
 
     if (loadMoreRef.current) {
@@ -88,7 +97,7 @@ export default function NewsInfiniteGrid({
     return () => {
       if (observerRef.current) observerRef.current.disconnect();
     };
-  }, [loadMore, nextPage, loading]);
+  }, [loadMore]);
 
   return (
     <>
