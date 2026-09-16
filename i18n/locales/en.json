@@ -60,5 +60,15 @@
     "timeline_2_desc": "I graduented from high school in 2019 and started my journey in computer science at <0>Build Bright University.</0>",
     "timeline_3_date": "2014-2019",
     "timeline_3_desc": "I completed my high school education in 2019, where I developed a strong interest in technology and programming."
+  },
+  "skills": {
+    "title_my": "My",
+    "title_technical": "Technical Skills",
+    "subtitle": "A comprehensive overview of my technical expertise, tools I use daily, and technologies I love working with.",
+    "section_title": "Technical Skills",
+    "top_stack": "Top Tech Stack",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "tools": "Tools & VC"
   }
 }

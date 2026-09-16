@@ -3,6 +3,7 @@
 import React from 'react';
 import { skillsData } from '@/data/skills';
 import { motion, Variants } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -64,33 +65,35 @@ const SkillCategory = ({ title, skills, colorClass }: { title: string, skills: a
 };
 
 export default function SkillsSection() {
+  const { t } = useTranslation();
+
   return (
     <section id="skills" className="mt-4 scroll-mt-24">
-      <h2 className="text-xl font-extrabold text-gray-900 dark:text-white mb-6 font-race">Technical Skills</h2>
+      <h2 className="text-xl font-extrabold text-gray-900 dark:text-white mb-6 font-race">{t('skills.section_title')}</h2>
 
       {/* Skills Rows */}
       <div className="flex flex-col gap-6">
 
         <SkillCategory
-          title="Top Tech Stack"
+          title={t('skills.top_stack')}
           skills={skillsData.topTechStack}
           colorClass="text-orange-500 dark:text-orange-400"
         />
 
         <SkillCategory
-          title="Frontend"
+          title={t('skills.frontend')}
           skills={skillsData.frontend}
           colorClass="text-blue-500 dark:text-blue-400"
         />
 
         <SkillCategory
-          title="Backend"
+          title={t('skills.backend')}
           skills={skillsData.backend}
           colorClass="text-emerald-500 dark:text-emerald-400"
         />
 
         <SkillCategory
-          title="Tools & VC"
+          title={t('skills.tools')}
           skills={skillsData.tools}
           colorClass="text-purple-500 dark:text-purple-400"
         />

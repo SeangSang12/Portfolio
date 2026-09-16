@@ -44,9 +44,22 @@ export default function AppHeader({ locale }: { locale: string }) {
   
   const toggleLang = () => {
     const nextLang = locale === "en" ? "kh" : "en";
+    
     const segments = pathname.split('/');
-    segments[1] = nextLang;
-    window.location.href = segments.join('/');
+    if (segments[1] === 'en' || segments[1] === 'kh') {
+      segments.splice(1, 1);
+    }
+    const cleanPath = segments.join('/') || '/';
+    
+    if (nextLang === 'kh') {
+      window.location.href = `/kh${cleanPath === '/' ? '' : cleanPath}`;
+    } else {
+      window.location.href = cleanPath;
+    }
+  };
+
+  const getLocalizedHref = (href: string) => {
+    return locale === 'en' ? href : `/kh${href}`;
   };
 
   return (
@@ -56,7 +69,7 @@ export default function AppHeader({ locale }: { locale: string }) {
         
         <div className="flex items-center gap-3">
           <Link 
-            href={`/${locale}`}
+            href={getLocalizedHref("/")}
             className="font-[family-name:var(--font-race-sport)] text-lg text-gray-900 dark:text-white uppercase tracking-wider"
           >
             Portfolio
@@ -69,7 +82,7 @@ export default function AppHeader({ locale }: { locale: string }) {
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
             {navLinks.map((link) => (
-              <Link key={link.id} href={`/${locale}${link.href}`} className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+              <Link key={link.id} href={getLocalizedHref(link.href)} className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
                 {t(link.translationKey, link.fallbackText)}
               </Link>
             ))}
@@ -160,7 +173,7 @@ export default function AppHeader({ locale }: { locale: string }) {
                   transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                 >
                   <Link 
-                    href={`/${locale}${link.href}`} 
+                    href={getLocalizedHref(link.href)} 
                     className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

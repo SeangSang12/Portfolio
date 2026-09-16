@@ -5,24 +5,37 @@ import { i18n } from './i18n-config';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Check if there is any supported locale in the pathname
-  const pathnameHasLocale = i18n.locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+  const currentCookie = request.cookies.get('language')?.value;
+  let locale = currentCookie || i18n.defaultLocale;
+  if (!i18n.locales.includes(locale as any)) locale = i18n.defaultLocale;
 
-  if (pathnameHasLocale) {
-    const currentLocale = pathname.split('/')[1];
-    const response = NextResponse.next();
-    response.cookies.set('language', currentLocale);
+  // 1. If URL explicitly has /en/, redirect to strip it for clean URLs
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    const newPath = pathname.replace(/^\/en/, '') || '/';
+    const response = NextResponse.redirect(new URL(newPath, request.url));
+    response.cookies.set('language', 'en');
     return response;
   }
 
-  // Redirect if there is no locale
-  const locale = request.cookies.get('language')?.value || i18n.defaultLocale;
-  const validLocale = i18n.locales.includes(locale as any) ? locale : i18n.defaultLocale;
-  
-  request.nextUrl.pathname = `/${validLocale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  // 2. If URL has /kh/, keep it and set cookie
+  if (pathname.startsWith('/kh/') || pathname === '/kh') {
+    const response = NextResponse.next();
+    response.cookies.set('language', 'kh');
+    return response;
+  }
+
+  // 3. If URL has NO locale...
+  if (locale === 'kh') {
+    const response = NextResponse.redirect(new URL(`/kh${pathname}`, request.url));
+    return response;
+  }
+
+  // If locale is en, rewrite internally so URL stays clean
+  if (locale === 'en') {
+    const response = NextResponse.rewrite(new URL(`/en${pathname}`, request.url));
+    response.cookies.set('language', 'en');
+    return response;
+  }
 }
 
 export const config = {

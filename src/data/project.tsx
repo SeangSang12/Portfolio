@@ -35,5 +35,18 @@ export const projects: Project[] = [
       { name: "CSS3", icon: SiCss, color: "#1572B6" },
       { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
     ]
+  },
+  {
+    id: "portfolio",
+    title: "My Portfolio",
+    description: "My personal developer portfolio showcasing my skills, projects, and professional journey. Built with modern web technologies including Next.js and Tailwind CSS.",
+    image: "/assets/project/portfolio.jpeg",
+    link: "https://porfolioseangsang.wenowkh.online",
+    tags: [
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+    ]
   }
 ];
