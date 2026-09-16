@@ -5,6 +5,7 @@ import { Moon, Sun, Globe, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
+import { navLinks } from "../data/nav";
 
 export default function AppHeader() {
   const { t, i18n } = useTranslation();
@@ -65,15 +66,11 @@ export default function AppHeader() {
           
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
-            <Link href="/about" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-              {t('nav.about', 'About')}
-            </Link>
-            <Link href="#skills" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-              {t('nav.skills', 'Skills')}
-            </Link>
-            <Link href="/project" className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
-              {t('nav.projects', 'Projects')}
-            </Link>
+            {navLinks.map((link) => (
+              <Link key={link.id} href={link.href} className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+                {t(link.translationKey, link.fallbackText)}
+              </Link>
+            ))}
           </nav>
 
           {/* Spacer */}
@@ -152,50 +149,23 @@ export default function AppHeader() {
             </div>
             
             <nav className="flex flex-col flex-1 items-center justify-start pt-16 px-6 pb-20 space-y-10">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
-              >
-                <Link 
-                  href="/about" 
-                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+              {navLinks.map((link, index) => (
+                <motion.div 
+                  key={link.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                 >
-                  {t('nav.about', 'About Me')}
-                </Link>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, delay: 0.15 }}
-              >
-                <Link 
-                  href="#skills" 
-                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('nav.skills', 'Skills')}
-                </Link>
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
-                <Link 
-                  href="/project" 
-                  className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {t('nav.projects', 'Projects')}
-                </Link>
-              </motion.div>
+                  <Link 
+                    href={link.href} 
+                    className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {t(link.translationKey, link.mobileFallbackText || link.fallbackText)}
+                  </Link>
+                </motion.div>
+              ))}
             </nav>
           </motion.div>
         )}
