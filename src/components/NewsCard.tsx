@@ -18,7 +18,7 @@ export default function NewsCard({ item, index }: NewsCardProps) {
   return (
     <article 
       key={id} 
-      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+      className="bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-[10px] overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group"
     >
       {imageUrl && (
         <div className="w-full aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800 relative">
@@ -34,7 +34,7 @@ export default function NewsCard({ item, index }: NewsCardProps) {
             }
           />
           {pubDate && (
-            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold shadow-sm pointer-events-none">
+            <div className="absolute top-2 right-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold shadow-sm pointer-events-none text-gray-900 dark:text-gray-200">
               {new Date(pubDate).toLocaleDateString()}
             </div>
           )}
@@ -70,7 +70,7 @@ export default function NewsCard({ item, index }: NewsCardProps) {
           </p>
         )}
         
-        <div className="mt-auto pt-3 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between gap-2">
+        <div className="mt-auto pt-3 border-t border-gray-100 dark:border-white/[0.05] flex items-center justify-between gap-2">
           <div className="flex flex-wrap gap-1.5 overflow-hidden h-5 md:h-6 items-center">
             {item.coin?.slice(0, 2).map((coin: string) => (
               <span key={coin} className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[9px] md:text-[10px] rounded font-semibold border border-blue-100 dark:border-blue-800/50 whitespace-nowrap">

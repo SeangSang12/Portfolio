@@ -5,6 +5,12 @@
     "projects": "Projects",
     "profile": "Profile"
   },
+  "seo": {
+    "title": "Seang Sang | Full-Stack Developer",
+    "description": "Portfolio of Seang Sang, a passionate software developer specializing in modern web applications, Next.js, and React.",
+    "og_title": "Seang Sang | Developer Portfolio",
+    "og_description": "Explore my latest projects, technical writing, and web development journey."
+  },
   "home": {
     "role": "Fullstack Developer || Junior Devops",
     "intro_1": "I'm a Fullstack Developer skilled in building responsive and modern web applications using React.js, Next.js, Tailwind CSS, TypeScript, Node.js, Express.js, Nest.js and databases like PostgreSQL MySQL. I enjoy creating clean UI designs and smooth user experiences while continuously improving my skills and learning new technologies.",

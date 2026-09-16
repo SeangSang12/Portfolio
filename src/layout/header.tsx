@@ -5,26 +5,23 @@ import { Moon, Sun, Globe, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
 import { navLinks } from "../data/nav";
 
-export default function AppHeader() {
+import { usePathname, useRouter } from "next/navigation";
+
+export default function AppHeader({ locale }: { locale: string }) {
   const { t, i18n } = useTranslation();
-  const [isDark, setIsDark] = useState(false);
-  const [lang, setLang] = useState(i18n.language || "EN");
+  const { theme, setTheme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  // Basic theme and lang logic
+  // Hydration fix
   useEffect(() => {
-    document.documentElement.lang = lang;
-
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.remove("dark");
-      document.documentElement.classList.add("light");
-    }
-  }, [isDark]);
+    setMounted(true);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -38,23 +35,28 @@ export default function AppHeader() {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleTheme = () => setIsDark(!isDark);
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const isDark = currentTheme === 'dark';
+  
+  const toggleTheme = () => {
+    setTheme(isDark ? 'light' : 'dark');
+  };
+  
   const toggleLang = () => {
-    const nextLang = lang === "EN" ? "KH" : "EN";
-    setLang(nextLang);
-    i18n.changeLanguage(nextLang);
-    document.documentElement.lang = nextLang;
+    const nextLang = locale === "en" ? "kh" : "en";
+    const segments = pathname.split('/');
+    segments[1] = nextLang;
+    window.location.href = segments.join('/');
   };
 
   return (
     <>
-      <header className="w-full border-b border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-950/50 backdrop-blur-md relative z-40">
+      <header className="sticky top-0 w-full border-b border-gray-200 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-950/70 backdrop-blur-md z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Left: Logo */}
         <div className="flex items-center gap-3">
           <Link 
-            href="/" 
+            href={`/${locale}`}
             className="font-[family-name:var(--font-race-sport)] text-lg text-gray-900 dark:text-white uppercase tracking-wider"
           >
             Portfolio
@@ -67,7 +69,7 @@ export default function AppHeader() {
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
             {navLinks.map((link) => (
-              <Link key={link.id} href={link.href} className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+              <Link key={link.id} href={`/${locale}${link.href}`} className="hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
                 {t(link.translationKey, link.fallbackText)}
               </Link>
             ))}
@@ -82,10 +84,10 @@ export default function AppHeader() {
             {/* Language Switch */}
             <button 
               onClick={toggleLang}
-              className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 transition-colors uppercase"
             >
-              <span className={`fi fi-${lang === 'EN' ? 'gb' : 'kh'} rounded-sm shadow-sm opacity-90`} />
-              <span>{lang}</span>
+              <span className={`fi fi-${locale === 'en' ? 'gb' : 'kh'} rounded-sm shadow-sm opacity-90`} />
+              <span>{locale}</span>
             </button>
 
             {/* Theme Toggle */}
@@ -94,7 +96,7 @@ export default function AppHeader() {
               className="p-1.5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md transition-colors"
               aria-label="Toggle Dark Mode"
             >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {mounted && isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
             {/* Profile Button */}
@@ -158,7 +160,7 @@ export default function AppHeader() {
                   transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                 >
                   <Link 
-                    href={link.href} 
+                    href={`/${locale}${link.href}`} 
                     className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

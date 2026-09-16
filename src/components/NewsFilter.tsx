@@ -26,7 +26,7 @@ export default function NewsFilter() {
   const currentTab = searchParams.get('tab') || 'latest';
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+    <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 mb-10">
 
       {/* Category Tab Dropdown (Mobile Only) */}
       <div className="relative group sm:hidden">
