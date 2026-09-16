@@ -1,3 +1,5 @@
+"use server";
+
 import { NewsResponse } from "@/types/news.type";
 
 export const fetchCryptoNews = async (page?: string, country?: string, language?: string): Promise<NewsResponse> => {

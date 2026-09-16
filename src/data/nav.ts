@@ -16,7 +16,7 @@ export const navLinks: NavLink[] = [
   },
   {
     id: 2,
-    href: "#skills",
+    href: "/skill",
     translationKey: "nav.skills",
     fallbackText: "Skills",
     mobileFallbackText: "Skills",
