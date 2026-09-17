@@ -54,7 +54,7 @@ export default function AppHeader({ locale }: { locale: string }) {
     if (nextLang === 'kh') {
       window.location.href = `/kh${cleanPath === '/' ? '' : cleanPath}`;
     } else {
-      window.location.href = cleanPath;
+      window.location.href = `/en${cleanPath === '/' ? '' : cleanPath}`;
     }
   };
 
