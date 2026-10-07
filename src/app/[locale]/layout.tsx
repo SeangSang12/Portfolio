@@ -41,7 +41,7 @@ export async function generateMetadata({
   const dict = await getDictionary(locale);
 
   return {
-    metadataBase: new URL("https://porfolioseangsang.wenowkh.online/"),
+    metadataBase: new URL("https://portfolioseangsang.wenowkh.online/"),
     
     title: {
       default: dict.seo.title,
@@ -60,7 +60,7 @@ export async function generateMetadata({
       "Software Engineer"
     ],
     
-    authors: [{ name: "Seang Sang", url: "https://porfolioseangsang.wenowkh.online/" }],
+    authors: [{ name: "Seang Sang", url: "https://portfolioseangsang.wenowkh.online/" }],
     creator: "Seang Sang",
     publisher: "Seang Sang",
     
@@ -81,7 +81,7 @@ export async function generateMetadata({
     openGraph: {
       title: dict.seo.og_title,
       description: dict.seo.og_description,
-      url: `https://porfolioseangsang.wenowkh.online/${locale}`,
+      url: `https://portfolioseangsang.wenowkh.online/${locale}`,
       siteName: "Seang Sang Portfolio",
       images: [
         {
@@ -140,7 +140,7 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Seang Sang",
-              url: "https://porfolioseangsang.wenowkh.online",
+              url: "https://portfolioseangsang.wenowkh.online",
               jobTitle: "Full-Stack Developer",
               alumniOf: "Build Bright University",
               sameAs: [

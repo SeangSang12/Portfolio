@@ -41,7 +41,7 @@ export const projects: Project[] = [
     title: "My Portfolio",
     description: "My personal developer portfolio showcasing my skills, projects, and professional journey. Built with modern web technologies including Next.js and Tailwind CSS.",
     image: "/assets/project/portfolio.jpeg",
-    link: "https://porfolioseangsang.wenowkh.online",
+    link: "https://portfolioseangsang.wenowkh.online",
     tags: [
       { name: "Next.js", icon: SiNextdotjs },
       { name: "React", icon: SiReact, color: "#61DAFB" },
