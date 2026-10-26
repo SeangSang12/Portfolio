@@ -51,10 +51,12 @@ export default function AppHeader({ locale }: { locale: string }) {
     }
     const cleanPath = segments.join('/') || '/';
     
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    
     if (nextLang === 'kh') {
-      window.location.href = `/kh${cleanPath === '/' ? '' : cleanPath}`;
+      window.location.href = `/kh${cleanPath === '/' ? '' : cleanPath}${search}`;
     } else {
-      window.location.href = `/en${cleanPath === '/' ? '' : cleanPath}`;
+      window.location.href = `/en${cleanPath === '/' ? '' : cleanPath}${search}`;
     }
   };
 

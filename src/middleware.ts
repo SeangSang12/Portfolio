@@ -11,8 +11,9 @@ export function middleware(request: NextRequest) {
 
   // 1. If URL explicitly has /en/, redirect to strip it for clean URLs
   if (pathname.startsWith('/en/') || pathname === '/en') {
-    const newPath = pathname.replace(/^\/en/, '') || '/';
-    const response = NextResponse.redirect(new URL(newPath, request.url));
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/^\/en/, '') || '/';
+    const response = NextResponse.redirect(url);
     response.cookies.set('language', 'en');
     return response;
   }
@@ -26,13 +27,17 @@ export function middleware(request: NextRequest) {
 
   // 3. If URL has NO locale...
   if (locale === 'kh') {
-    const response = NextResponse.redirect(new URL(`/kh${pathname}`, request.url));
+    const url = request.nextUrl.clone();
+    url.pathname = `/kh${pathname}`;
+    const response = NextResponse.redirect(url);
     return response;
   }
 
   // If locale is en, rewrite internally so URL stays clean
   if (locale === 'en') {
-    const response = NextResponse.rewrite(new URL(`/en${pathname}`, request.url));
+    const url = request.nextUrl.clone();
+    url.pathname = `/en${pathname}`;
+    const response = NextResponse.rewrite(url);
     response.cookies.set('language', 'en');
     return response;
   }
