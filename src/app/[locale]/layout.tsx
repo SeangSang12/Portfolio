@@ -31,24 +31,24 @@ const hanuman = localFont({
 import { getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
 
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: Promise<{ locale: string }> 
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const resolvedParams = await params;
   const locale = resolvedParams.locale as Locale;
   const dict = await getDictionary(locale);
 
   return {
-    metadataBase: new URL("https://portfolioseangsang.wenowkh.online/"),
-    
+    metadataBase: new URL("https://www.seangsang.xyz/"),
+
     title: {
       default: dict.seo.title,
       template: "%s | Seang Sang",
     },
     description: dict.seo.description,
-    
+
     keywords: [
       "Seang Sang",
       "Developer Portfolio",
@@ -59,17 +59,17 @@ export async function generateMetadata({
       "Web Developer",
       "Software Engineer"
     ],
-    
-    authors: [{ name: "Seang Sang", url: "https://portfolioseangsang.wenowkh.online/" }],
+
+    authors: [{ name: "Seang Sang", url: "https://www.seangsang.xyz/" }],
     creator: "Seang Sang",
     publisher: "Seang Sang",
-    
+
     formatDetection: {
       email: false,
       address: false,
       telephone: false,
     },
-    
+
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -77,11 +77,11 @@ export async function generateMetadata({
         'km-KH': '/kh',
       },
     },
-    
+
     openGraph: {
       title: dict.seo.og_title,
       description: dict.seo.og_description,
-      url: `https://portfolioseangsang.wenowkh.online/${locale}`,
+      url: `https://www.seangsang.xyz/${locale}`,
       siteName: "Seang Sang Portfolio",
       images: [
         {
@@ -94,7 +94,7 @@ export async function generateMetadata({
       locale: locale === 'en' ? 'en_US' : 'km_KH',
       type: "website",
     },
-    
+
     twitter: {
       card: "summary_large_image",
       title: dict.seo.og_title,
@@ -140,7 +140,7 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Seang Sang",
-              url: "https://portfolioseangsang.wenowkh.online",
+              url: "https://www.seangsang.xyz/",
               jobTitle: "Full-Stack Developer",
               alumniOf: "Build Bright University",
               sameAs: [

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://portfolioseangsang.wenowkh.online/sitemap.xml',
+    sitemap: 'https://www.seangsang.xyz/sitemap.xml',
   };
 }

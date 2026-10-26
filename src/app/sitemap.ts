@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { i18n } from '../i18n-config';
 
-const URL = 'https://portfolioseangsang.wenowkh.online';
+const URL = 'https://www.seangsang.xyz/';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ['', '/about', '/skill', '/project', '/news'];
