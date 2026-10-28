@@ -1,31 +1,20 @@
-
 import type { MetadataRoute } from "next";
 import { i18n } from "../i18n-config";
 
 const URL = "https://www.seangsang.xyz";
 
+const routes = [
+  "",
+  "/about",
+  "/skill",
+  "/project",
+  "/news",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "",
-    "/about",
-    "/skill",
-    "/project",
-    "/news",
-  ];
-
-  return routes.map((route) => {
-    const alternates = i18n.locales.reduce(
-      (acc, locale) => {
-        acc[locale === "en" ? "en-US" : "km-KH"] =
-          `${URL}/${locale}${route}`;
-
-        return acc;
-      },
-      {} as Record<string, string>
-    );
-
-    return {
-      url: `${URL}/en${route}`,
+  return routes.flatMap((route) =>
+    i18n.locales.map((locale) => ({
+      url: `${URL}/${locale}${route}`,
       lastModified: new Date(),
       changeFrequency:
         route === ""
@@ -34,9 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             ? "daily"
             : "weekly",
       priority: route === "" ? 1 : 0.8,
-      alternates: {
-        languages: alternates,
-      },
-    };
-  });
+    }))
+  );
 }

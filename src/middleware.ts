@@ -5,6 +5,17 @@ import { i18n } from './i18n-config';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 0. Bypass metadata files, Next.js internal paths, API routes, and static files
+  if (
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/_next') ||
+    pathname.includes('.')
+  ) {
+    return NextResponse.next();
+  }
+
   const currentCookie = request.cookies.get('language')?.value;
   let locale = currentCookie || i18n.defaultLocale;
   if (!i18n.locales.includes(locale as any)) locale = i18n.defaultLocale;
@@ -44,6 +55,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Matcher ignoring `/_next/` and `/api/`
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|assets|images|font).*)'],
+  // Matcher ignoring internal paths, api, static files, and metadata routes
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|assets|images|font|.*\\..*).*)',
+  ],
 };
