@@ -29,7 +29,7 @@ export const projects: Project[] = [
     title: "Sweet Cafe",
     description: "A beautiful and responsive landing page for a coffee shop. It features a modern design with scroll reveal animations, a mobile-friendly menu, and sections for products, services, and testimonials.",
     image: "/assets/project/coffee.png",
-    link: "http://qab6mndejqb5zebammh9ibw5.187.127.218.53.sslip.io/",
+    link: "https://sweetcafe.seangsang.xyz/",
     tags: [
       { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
       { name: "CSS3", icon: SiCss, color: "#1572B6" },
